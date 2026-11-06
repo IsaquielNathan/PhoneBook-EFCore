@@ -4,8 +4,8 @@
 
 
 var isAppRunning = true;
-while (isAppRunning)
-    var option = AnsiConsole.Prompt(
+while  (isAppRunning)
+   { var option = AnsiConsole.Prompt(
     new SelectionPrompt<ContactOptions>()
         .Title("Selecione uma opção:")
         .AddChoices(Enum.GetValues<ContactOptions>())
@@ -32,6 +32,7 @@ while (isAppRunning)
             Console.WriteLine("Saindo do programa...");
             break;
     }
+}
 
    
 
