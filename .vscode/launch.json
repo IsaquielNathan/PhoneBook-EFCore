@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "PhoneBook",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/PhoneBook/bin/Debug/net10.0/PhoneBook.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/PhoneBook",
+            "console": "integratedTerminal",
+            "stopAtEntry": false
+        }
+    ]
+}
