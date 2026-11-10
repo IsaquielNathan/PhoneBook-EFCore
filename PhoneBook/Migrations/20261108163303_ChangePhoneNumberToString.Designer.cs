@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace PhoneBook.Migrations
 {
-    [DbContext(typeof(ContactConxtet))]
+    [DbContext(typeof(ContactContext))]
     [Migration("20261108163303_ChangePhoneNumberToString")]
     partial class ChangePhoneNumberToString
     {
