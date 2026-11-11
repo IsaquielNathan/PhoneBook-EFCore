@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace PhoneBook.Controllers;
 internal class ContactController
 {
-    public static void AddContact(string name, string email, string phoneNumber, int categoryId)
+    public static void AddContact(string name, string email, string phoneNumber, int? categoryId)
     {
         using var db = new ContactContext();
         db.Add(new Contact { 
@@ -50,6 +50,12 @@ internal class ContactController
       .SingleOrDefault(x => x.ContactId == id);
     return contact  ;
     }
+
+    public static bool ContactExists(string name)
+{
+    using var db = new ContactContext();
+    return db.Contacts.Any(c => c.Name.ToLower() == name.ToLower());
+}
 
    
 }

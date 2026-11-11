@@ -18,14 +18,22 @@ internal class CategoryService
         UserInterface.ShowCategoryTable(categories);
     }
 
-   internal static Category GetCategoryOptionInput()
+   internal static Category? GetCategoryOptionInput()
 {
-    var categories = CategoryController.GetCategories();
-    var categoriesArray = categories.Select(x => x.Name).ToArray();
+     var categories = CategoryController.GetCategories();
+      
+      if (!categories.Any())
+    {
+        AnsiConsole.MarkupLine("[yellow]Nenhuma categoria cadastrada! Crie uma categoria primeiro.[/]");
+        Console.WriteLine("Pressione enter para continuar");
+        Console.ReadLine();
+        return null;
+    } 
+    var categoriesArray = categories.Select(x =>Spectre.Console.Markup.Escape (x.Name)).ToArray();
     var option = AnsiConsole.Prompt(new SelectionPrompt<string>()
             .Title("Selecione uma categoria:")
             .AddChoices(categoriesArray));
-            var category = categories.SingleOrDefault(x => x.Name == option)!;
+            var category = categories.SingleOrDefault(x =>Spectre.Console.Markup.Escape (x.Name) == option)!;
     ;
     return category;
 }
@@ -33,18 +41,30 @@ internal class CategoryService
     internal static void GetCategory()
     {
         var category = GetCategoryOptionInput();
+         if (category == null)
+    {
+        return; 
+    }
         UserInterface.ShowCategory(category);    
     }
 
    internal static void DeleteCategory()
 {
     var category = GetCategoryOptionInput();
+     if (category == null)
+    {
+        return; 
+    }
     CategoryController.DeleteCategory(category);
 }
 
 internal static void UpdateCategory()
     {
         var category = GetCategoryOptionInput();
+         if (category == null)
+    {
+        return; 
+    }
 
         var name = AnsiConsole.Ask<string>("Nome da Categoria:");
 

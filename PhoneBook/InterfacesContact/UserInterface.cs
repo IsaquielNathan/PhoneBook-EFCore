@@ -27,7 +27,7 @@ internal class UserInterface
             break;
     
         case MenuOptions.ViewContact:
-            ContactService.GetProduct();
+            ContactService.GetContact();
             break;
         
         case MenuOptions.ViewAllContacts:
@@ -72,7 +72,7 @@ internal class UserInterface
      }
      static internal void ShowContact (Contact contact)
      {
-          var panel = new Panel($@"Id: {contact.ContactId} Nome: {Spectre.Console.Markup.Escape(contact.Name)} Email: {Spectre.Console.Markup.Escape(contact.Email)} Número de Telefone: {Spectre.Console.Markup.Escape(contact.PhoneNumber)} Categoria: {Spectre.Console.Markup.Escape(contact.Category.Name)}" );
+          var panel = new Panel($@"Id: {contact.ContactId} Nome: {Spectre.Console.Markup.Escape(contact.Name)} Email: {Spectre.Console.Markup.Escape(contact.Email)} Número de Telefone: {Spectre.Console.Markup.Escape(contact.PhoneNumber)} Categoria: {Spectre.Console.Markup.Escape(contact.Category?.Name ?? "Nenhuma Categoria")}" );
           panel.Header = new PanelHeader("Contact Info");
           panel.Padding = new Padding(2, 2, 2, 2);
 
@@ -99,7 +99,7 @@ internal class UserInterface
              Spectre.Console.Markup.Escape(contact.Name), 
             Spectre.Console.Markup.Escape(contact.Email), 
             Spectre.Console.Markup.Escape(contact.PhoneNumber),
-             Spectre.Console.Markup.Escape(contact.Category!.Name)
+             Spectre.Console.Markup.Escape(contact.Category?.Name ?? "Nenhuma Categoria")
             );
         }
         AnsiConsole.Write(table);

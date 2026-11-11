@@ -22,13 +22,26 @@ namespace PhoneBook.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CategoryName")
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasColumnName("CategoryName");
 
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            Name = "Família"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            Name = "Trabalho"
+                        });
                 });
 
             modelBuilder.Entity("PhoneBook.Contact", b =>
@@ -37,7 +50,7 @@ namespace PhoneBook.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Email")
@@ -60,6 +73,16 @@ namespace PhoneBook.Migrations
                         .IsUnique();
 
                     b.ToTable("Contacts");
+
+                    b.HasData(
+                        new
+                        {
+                            ContactId = 1,
+                            CategoryId = 2,
+                            Email = "admin@empresa.com",
+                            Name = "Administrador",
+                            PhoneNumber = "000000000"
+                        });
                 });
 
             modelBuilder.Entity("PhoneBook.Contact", b =>
@@ -67,8 +90,7 @@ namespace PhoneBook.Migrations
                     b.HasOne("PhoneBook.Category", "Category")
                         .WithMany("Contacts")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Category");
                 });

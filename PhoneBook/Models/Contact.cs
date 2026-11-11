@@ -13,8 +13,8 @@ internal class Contact
     public  required string Email { get; set; }
     public required string PhoneNumber { get; set; }
 
-    public int CategoryId {get; set;}
-    public Category Category {get; set;} = null!;
+    public int? CategoryId {get; set;}
+    public Category? Category {get; set;}
 
 }
 
